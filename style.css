@@ -1,0 +1,87 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(/Assets/images/bgc.avif);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background-color: #a1c5fa;
+}
+
+#game-board {
+  height: 100vmin;
+  width: 100vmin;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+}
+#game-board > div:hover {
+  border: solid #ffffff 1px;
+  cursor: pointer;
+}
+
+.tools {
+  background: burlywood;
+  height: 100vmin;
+  width: 30vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mini-btn-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.dirthblock {
+  background: url(/Assets/images/dirtblock.jpg) no-repeat center center/cover;
+}
+
+.grassblock {
+  background: url(/Assets/images/grassblock.jpg) no-repeat center center/cover;
+}
+
+.stone {
+  background: url(/Assets/images/MossyStoneBrick.jpg) no-repeat center center/cover;
+}
+
+.plant {
+  background: url(/Assets/images/plant.jpg) no-repeat center center/cover;
+}
+
+.wood {
+  background: url(/Assets/images/woodblock.jpg) no-repeat center center/cover;
+}
+
+.nethergoldore {
+  background: url(/Assets/images/nethergold.jpg) no-repeat center center/cover;
+}
+
+.tools > button {
+  width: 120px;
+  height: 120px;
+  color: #ffffff;
+  padding: 10px;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+
+.tools > button > img {
+  width: 70px;
+  height: 70px;
+}
+
+.inventory-btn,
+.reset-btn {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
