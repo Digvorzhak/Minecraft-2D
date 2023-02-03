@@ -44,24 +44,42 @@ body {
   background: url(/Assets/images/dirtblock.jpg) no-repeat center center/cover;
 }
 
+.removeddirth {
+}
+
 .grassblock {
   background: url(/Assets/images/grassblock.jpg) no-repeat center center/cover;
+}
+
+.removedgrass {
 }
 
 .stone {
   background: url(/Assets/images/MossyStoneBrick.jpg) no-repeat center center/cover;
 }
 
+.removedstone {
+}
+
 .plant {
   background: url(/Assets/images/plant.jpg) no-repeat center center/cover;
+}
+
+.removedplant {
 }
 
 .wood {
   background: url(/Assets/images/woodblock.jpg) no-repeat center center/cover;
 }
 
+.removedwood {
+}
+
 .nethergoldore {
   background: url(/Assets/images/nethergold.jpg) no-repeat center center/cover;
+}
+
+.removedgoldroe {
 }
 
 .tools > button {
@@ -83,5 +101,12 @@ body {
   width: 60px;
   height: 60px;
   margin-bottom: 50px;
+  padding: 3px 0px;
   cursor: pointer;
+}
+
+.inventory-btn,
+.reset-btn > img {
+  width: 50px;
+  height: 50px;
 }
