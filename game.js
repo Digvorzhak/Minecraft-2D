@@ -23,6 +23,7 @@ const world = [
   [1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], // 19
 ];
 
+let gameBoard = JSON.parse(JSON.stringify(world));
 let inventory = [0, 0, 0, 0, 0, 0];
 let blocks = ["", "removeddirt", "removedgrass", "removedwood", "removedplant", "nethergoldoreremoved", "stoneremoved"];
 const board = document.getElementById("game-board");
@@ -47,39 +48,39 @@ function draw() {
   for (let i = 0; i < world.length; i++) {
     for (let j = 0; j < world[i].length; j++) {
       if (world[i][j] === 0) {
-        world[i][j] = document.createElement("div");
+        gameBoard[i][j] = document.createElement("div");
 
-        board.appendChild(world[i][j]);
+        board.appendChild(gameBoard[i][j]);
       }
       if (world[i][j] === 1) {
-        world[i][j] = document.createElement("div");
-        world[i][j].classList.add("nethergoldore");
-        board.appendChild(world[i][j]);
+        gameBoard[i][j] = document.createElement("div");
+        gameBoard[i][j].classList.add("nethergoldore");
+        board.appendChild(gameBoard[i][j]);
       }
       if (world[i][j] === 2) {
-        world[i][j] = document.createElement("div");
-        world[i][j].classList.add("dirtblock");
-        board.appendChild(world[i][j]);
+        gameBoard[i][j] = document.createElement("div");
+        gameBoard[i][j].classList.add("dirtblock");
+        board.appendChild(gameBoard[i][j]);
       }
       if (world[i][j] === 3) {
-        world[i][j] = document.createElement("div");
-        world[i][j].classList.add("grassblock");
-        board.appendChild(world[i][j]);
+        gameBoard[i][j] = document.createElement("div");
+        gameBoard[i][j].classList.add("grassblock");
+        board.appendChild(gameBoard[i][j]);
       }
       if (world[i][j] === 4) {
-        world[i][j] = document.createElement("div");
-        world[i][j].classList.add("wood");
-        board.appendChild(world[i][j]);
+        gameBoard[i][j] = document.createElement("div");
+        gameBoard[i][j].classList.add("wood");
+        board.appendChild(gameBoard[i][j]);
       }
       if (world[i][j] === 5) {
-        world[i][j] = document.createElement("div");
-        world[i][j].classList.add("plant");
-        board.appendChild(world[i][j]);
+        gameBoard[i][j] = document.createElement("div");
+        gameBoard[i][j].classList.add("plant");
+        board.appendChild(gameBoard[i][j]);
       }
       if (world[i][j] === 6) {
-        world[i][j] = document.createElement("div");
-        world[i][j].classList.add("stone");
-        board.appendChild(world[i][j]);
+        gameBoard[i][j] = document.createElement("div");
+        gameBoard[i][j].classList.add("stone");
+        board.appendChild(gameBoard[i][j]);
       }
     }
   }
@@ -186,29 +187,26 @@ function revertChange() {
   dirt.innerHTML = "0";
   for (let i = 0; i < world.length; i++) {
     for (let j = 0; j < world[i].length; j++) {
-      if (world[i][j].className === "removeddirt") {
-        world[i][j].classList.add("dirtblock");
-        world[i][j].classList.remove("removeddirt");
+      if (world[i][j] === 0) {
+        gameBoard[i][j].className = "";
       }
-      if (world[i][j].className === "removedgrass") {
-        world[i][j].classList.add("grassblock");
-        world[i][j].classList.remove("removedgrass");
+      if (world[i][j] === 1) {
+        gameBoard[i][j].className = "nethergoldore";
       }
-      if (world[i][j].className === "removedwood") {
-        world[i][j].classList.add("wood");
-        world[i][j].classList.remove("removedwood");
+      if (world[i][j] === 2) {
+        gameBoard[i][j].className = "dirtblock";
       }
-      if (world[i][j].className === "removedplant") {
-        world[i][j].classList.add("plant");
-        world[i][j].classList.remove("removedplant");
+      if (world[i][j] === 3) {
+        gameBoard[i][j].className = "grassblock";
       }
-      if (world[i][j].className === "nethergoldoreremoved") {
-        world[i][j].classList.add("nethergoldore");
-        world[i][j].classList.remove("nethergoldoreremoved");
+      if (world[i][j] === 4) {
+        gameBoard[i][j].className = "wood";
       }
-      if (world[i][j].className === "stoneremoved") {
-        world[i][j].classList.add("stone");
-        world[i][j].classList.remove("stoneremoved");
+      if (world[i][j] === 5) {
+        gameBoard[i][j].className = "plant";
+      }
+      if (world[i][j] === 6) {
+        gameBoard[i][j].className = "stone";
       }
     }
   }
