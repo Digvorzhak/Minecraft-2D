@@ -10,14 +10,26 @@
   </head>
   <body>
     <div class="container">
-      <div id="game-board"></div>
+      <div id="game-board" class="board"></div>
     </div>
     <div class="tools">
-      <button class="shovel-btn"><img src="/Assets/images/shovel.jpg" alt="" /></button>
-      <button class="axe-btn"><img src="/Assets/images/axe.png" alt="" /></button>
-      <button class="pickaxe-btn"><img src="/Assets/images/pickaxe.jpg" alt="" /></button>
+      <button class="shovel-btn"></button>
+      <button class="axe-btn"></button>
+      <button class="pickaxe-btn"></button>
       <div class="mini-btn-wrap">
-        <button class="inventory-btn"></button>
+        <div class="inventory-container1">
+          <button class="inventory-btn stone">0</button>
+          <button class="inventory-btn nethergoldore">0</button>
+        </div>
+        <div class="inventory-container2">
+          <button class="inventory-btn dirtblock">0</button>
+          <button class="inventory-btn grassblock">0</button>
+        </div>
+        <div class="inventory-container3">
+          <button class="inventory-btn wood">0</button>
+          <button class="inventory-btn plant">0</button>
+        </div>
+
         <button class="reset-btn"><img src="/Assets/images/reset.png" alt="" /></button>
       </div>
     </div>

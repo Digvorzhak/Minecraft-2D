@@ -25,6 +25,9 @@ body {
   cursor: pointer;
 }
 
+.board {
+}
+
 .tools {
   background: burlywood;
   height: 100vmin;
@@ -35,16 +38,24 @@ body {
   align-items: center;
 }
 
+.active-tool {
+  border: 5px solid darkblue;
+}
+
+.active-item {
+  border: 5px solid darkblue;
+}
+
 .mini-btn-wrap {
   display: flex;
   flex-direction: column;
 }
 
-.dirthblock {
+.dirtblock {
   background: url(/Assets/images/dirtblock.jpg) no-repeat center center/cover;
 }
 
-.removeddirth {
+.removeddirt {
 }
 
 .grassblock {
@@ -90,10 +101,14 @@ body {
   margin-bottom: 50px;
   cursor: pointer;
 }
-
-.tools > button > img {
-  width: 70px;
-  height: 70px;
+.shovel-btn {
+  background: url(/Assets/images/shovel.jpg) no-repeat center center/cover;
+}
+.axe-btn {
+  background: url(/Assets/images/axe.png) no-repeat center center/cover;
+}
+.pickaxe-btn {
+  background: url(/Assets/images/pickaxe.jpg) no-repeat center center/cover;
 }
 
 .inventory-btn,
@@ -109,4 +124,30 @@ body {
 .reset-btn > img {
   width: 50px;
   height: 50px;
+}
+
+.inventory-container1 {
+  display: flex;
+  gap: 5px;
+}
+.inventory-container2 {
+  display: flex;
+  gap: 5px;
+}
+.inventory-container3 {
+  display: flex;
+  gap: 5px;
+}
+
+.inventory-container1 > button {
+  color: #ffffff;
+}
+.inventory-container2 > button {
+  color: #ffffff;
+}
+.inventory-container3 > button {
+  color: #ffffff;
+}
+
+.inventory-btn {
 }
