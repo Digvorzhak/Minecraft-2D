@@ -23,9 +23,6 @@ const world = [
   [1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], // 19
 ];
 
-let gameBoard = JSON.parse(JSON.stringify(world));
-let inventory = [0, 0, 0, 0, 0, 0];
-let blocks = ["", "removeddirt", "removedgrass", "removedwood", "removedplant", "nethergoldoreremoved", "stoneremoved"];
 const board = document.getElementById("game-board");
 const shovel = document.querySelector(".shovel-btn");
 const axe = document.querySelector(".axe-btn");
@@ -38,11 +35,15 @@ const grass = document.querySelector(".grassblock");
 const dirt = document.querySelector(".dirtblock");
 const wood = document.querySelector(".wood");
 const plant = document.querySelector(".plant");
+const startModal = document.getElementById("start-modal");
+const startButton = document.getElementById("start-button");
+const tools = document.querySelector(".tools");
+const buttons = document.querySelectorAll(".tools button");
+let gameBoard = JSON.parse(JSON.stringify(world));
+let inventory = [0, 0, 0, 0, 0, 0];
+let blocks = ["", "removeddirt", "removedgrass", "removedwood", "removedplant", "nethergoldoreremoved", "stoneremoved"];
 let currentItem = "";
-
-// console.log(stone, nethergoldore, grass, dirt, wood, plant);
-
-// console.log(shovel, axe, pickaxe);
+let currentTool = "";
 
 function draw() {
   for (let i = 0; i < world.length; i++) {
@@ -89,93 +90,72 @@ function draw() {
 draw();
 
 function shovelTool(e) {
-  if (e.target.className !== "shovel-btn active-tool") {
-    shovel.classList.toggle("active-tool");
-    board.addEventListener("click", shovelMechanic);
-  } else {
-    shovel.classList.toggle("active-tool");
-    board.removeEventListener("click", shovelMechanic);
-  }
+  currentTool = "shovel";
+  board.addEventListener("click", shovelMechanic);
 }
 
 function axeTool(e) {
-  if (e.target.className !== "axe-btn active-tool") {
-    axe.classList.toggle("active-tool");
-    board.addEventListener("click", axeMechanic);
-  } else {
-    axe.classList.toggle("active-tool");
-    board.removeEventListener("click", axeMechanic);
-  }
+  currentTool = "axe";
+  board.addEventListener("click", axeMechanic);
 }
 
 function pickaxeTool(e) {
-  if (e.target.className !== "pickaxe-btn active-tool") {
-    pickaxe.classList.toggle("active-tool");
-    board.addEventListener("click", pickaxeMechanic);
-  } else {
-    pickaxe.classList.toggle("active-tool");
-    board.removeEventListener("click", pickaxeMechanic);
-  }
+  currentTool = "pickaxe";
+  board.addEventListener("click", pickaxeMechanic);
 }
 
 function shovelMechanic(e) {
-  if (e.target.className === "dirtblock") {
-    e.target.classList.remove("dirtblock");
-    e.target.classList.add("removeddirt");
-    inventory[2]++;
-    dirt.innerHTML = `${inventory[2]}`;
-  }
-  if (e.target.className === "grassblock") {
-    e.target.classList.remove("grassblock");
-    e.target.classList.add("removedgrass");
-    inventory[3]++;
-    grass.innerHTML = `${inventory[3]}`;
+  if (currentTool === "shovel" && shovel.className.includes("active-item")) {
+    if (e.target.className === "dirtblock") {
+      e.target.classList.remove("dirtblock");
+      e.target.classList.add("removeddirt");
+      inventory[2]++;
+      dirt.innerHTML = `${inventory[2]}`;
+    }
+    if (e.target.className === "grassblock") {
+      e.target.classList.remove("grassblock");
+      e.target.classList.add("removedgrass");
+      inventory[3]++;
+      grass.innerHTML = `${inventory[3]}`;
+    }
   }
 }
 
 function axeMechanic(e) {
-  if (e.target.className === "wood") {
-    e.target.classList.remove("wood");
-    e.target.classList.add("removedwood");
-    inventory[4]++;
-    wood.innerHTML = `${inventory[4]}`;
-  }
-  if (e.target.className === "plant") {
-    e.target.classList.remove("plant");
-    e.target.classList.add("removedplant");
-    inventory[5]++;
-    plant.innerHTML = `${inventory[5]}`;
+  if (currentTool === "axe" && axe.className.includes("active-item")) {
+    if (e.target.className === "wood") {
+      e.target.classList.remove("wood");
+      e.target.classList.add("removedwood");
+
+      inventory[4]++;
+      wood.innerHTML = `${inventory[4]}`;
+    }
+    // if(e.target.className === remo)
+    if (e.target.className === "plant") {
+      e.target.classList.remove("plant");
+      e.target.classList.add("removedplant");
+      inventory[5]++;
+      plant.innerHTML = `${inventory[5]}`;
+    }
   }
 }
 
 function pickaxeMechanic(e) {
-  if (e.target.className === "nethergoldore") {
-    e.target.classList.remove("nethergoldore");
-    e.target.classList.add("nethergoldoreremoved");
-    inventory[1]++;
-    nethergoldore.innerHTML = `${inventory[1]}`;
-  }
-  if (e.target.className === "stone") {
-    e.target.classList.remove("stone");
-    e.target.classList.add("stoneremoved");
-    inventory[0]++;
-    stone.innerHTML = `${inventory[0]}`;
+  if (currentTool === "pickaxe" && pickaxe.className.includes("active-item")) {
+    if (e.target.className === "nethergoldore") {
+      e.target.classList.remove("nethergoldore");
+      e.target.classList.add("nethergoldoreremoved");
+      inventory[1]++;
+      nethergoldore.innerHTML = `${inventory[1]}`;
+    }
+    if (e.target.className === "stone") {
+      e.target.classList.remove("stone");
+      e.target.classList.add("stoneremoved");
+      inventory[0]++;
+      stone.innerHTML = `${inventory[0]}`;
+    }
   }
 }
-
-// function updateInventory(block) {
-//   console.log(block);
-//   console.log(inventory[inventory.length - 1].className);
-//   console.log(inventoryShow.className);
-
-//   if (inventoryShow.className !== `inventory-btn ${block.className}`) {
-//     inventoryShow.classList.add(inventory[inventory.length - 1].className);
-//   } else {
-//     inventoryShow.classList.remove(inventory[inventory.length - 2].className);
-//     inventoryShow.classList.add(inventory[inventory.length - 1].className);
-//   }
-//   // console.log(inventoryShow.className.slice(13));
-// }
 
 function revertChange() {
   inventory = [0, 0, 0, 0, 0, 0];
@@ -212,9 +192,11 @@ function revertChange() {
   }
 }
 
-// function add(e){
-//   if(stone)
-// }
+startButton.addEventListener("click", function () {
+  startModal.style.display = "none";
+  board.style.display = "grid";
+  tools.style.display = "flex";
+});
 
 shovel.addEventListener("click", shovelTool);
 axe.addEventListener("click", axeTool);
@@ -223,12 +205,12 @@ newGame.addEventListener("click", revertChange);
 
 stone.addEventListener("click", function (e) {
   currentItem = "stone";
-  console.log(currentItem);
   board.addEventListener("click", function (e) {
-    if (currentItem === "stone") {
+    if (currentItem === "stone" && stone.className.includes("active-item")) {
       for (let i = 0; i < blocks.length; i++) {
         if (e.target.className === blocks[i]) {
           if (inventory[0] > 0) {
+            e.target.className = "";
             e.target.classList.add("stone");
             inventory[0]--;
             stone.innerHTML = `${inventory[0]}`;
@@ -241,12 +223,12 @@ stone.addEventListener("click", function (e) {
 
 nethergoldore.addEventListener("click", function (e) {
   currentItem = "nethergoldore";
-  console.log(currentItem);
   board.addEventListener("click", function (e) {
-    if (currentItem === "nethergoldore") {
+    if (currentItem === "nethergoldore" && nethergoldore.className.includes("active-item")) {
       for (let i = 0; i < blocks.length; i++) {
         if (e.target.className === blocks[i]) {
           if (inventory[1] > 0) {
+            e.target.className = "";
             e.target.classList.add("nethergoldore");
             inventory[1]--;
             nethergoldore.innerHTML = `${inventory[1]}`;
@@ -259,12 +241,12 @@ nethergoldore.addEventListener("click", function (e) {
 
 dirt.addEventListener("click", function (e) {
   currentItem = "dirt";
-  console.log(currentItem);
   board.addEventListener("click", function (e) {
-    if (currentItem === "dirt") {
+    if (currentItem === "dirt" && dirt.className.includes("active-item")) {
       for (let i = 0; i < blocks.length; i++) {
         if (e.target.className === blocks[i]) {
           if (inventory[2] > 0) {
+            e.target.className = "";
             e.target.classList.add("dirtblock");
             inventory[2]--;
             dirt.innerHTML = `${inventory[2]}`;
@@ -277,12 +259,12 @@ dirt.addEventListener("click", function (e) {
 
 grass.addEventListener("click", function (e) {
   currentItem = "grass";
-  console.log(currentItem);
   board.addEventListener("click", function (e) {
-    if (currentItem === "grass") {
+    if (currentItem === "grass" && grass.className.includes("active-item")) {
       for (let i = 0; i < blocks.length; i++) {
         if (e.target.className === blocks[i]) {
           if (inventory[3] > 0) {
+            e.target.className = "";
             e.target.classList.add("grassblock");
             inventory[3]--;
             grass.innerHTML = `${inventory[3]}`;
@@ -295,12 +277,12 @@ grass.addEventListener("click", function (e) {
 
 wood.addEventListener("click", function (e) {
   currentItem = "wood";
-  console.log(currentItem);
   board.addEventListener("click", function (e) {
-    if (currentItem === "wood") {
+    if (currentItem === "wood" && wood.className.includes("active-item")) {
       for (let i = 0; i < blocks.length; i++) {
         if (e.target.className === blocks[i]) {
           if (inventory[4] > 0) {
+            e.target.className = "";
             e.target.classList.add("wood");
             inventory[4]--;
             wood.innerHTML = `${inventory[4]}`;
@@ -313,12 +295,12 @@ wood.addEventListener("click", function (e) {
 
 plant.addEventListener("click", function (e) {
   currentItem = "plant";
-  console.log(currentItem);
   board.addEventListener("click", function (e) {
-    if (currentItem === "plant") {
+    if (currentItem === "plant" && plant.className.includes("active-item")) {
       for (let i = 0; i < blocks.length; i++) {
         if (e.target.className === blocks[i]) {
           if (inventory[5] > 0) {
+            e.target.className = "";
             e.target.classList.add("plant");
             inventory[5]--;
             plant.innerHTML = `${inventory[5]}`;
@@ -328,3 +310,13 @@ plant.addEventListener("click", function (e) {
     }
   });
 });
+
+buttons.forEach((button) =>
+  button.addEventListener("click", (e) => {
+    if (button.classList.contains("reset-btn")) {
+      return;
+    }
+    buttons.forEach((button) => button.classList.remove("active-item"));
+    button.classList.add("active-item");
+  })
+);

@@ -3,6 +3,8 @@ body {
   justify-content: center;
   align-items: center;
   background: url(/Assets/images/bgc.avif);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
 }
 
 .container {
@@ -13,16 +15,38 @@ body {
   background-color: #a1c5fa;
 }
 
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: rgb(53, 206, 117);
+  width: 50rem;
+  height: 50rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
 #game-board {
   height: 100vmin;
   width: 100vmin;
   display: grid;
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(20, 1fr);
+  display: none;
+  cursor: pointer;
 }
 #game-board > div:hover {
-  border: solid #ffffff 1px;
-  cursor: pointer;
+  box-shadow: inset 0 0 0px 1px #fff;
+  /* border: solid #ffffff 1px; */
 }
 
 .board {
@@ -36,14 +60,15 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  display: none;
 }
 
-.active-tool {
+/* .active-tool {
   border: 5px solid darkblue;
-}
+} */
 
 .active-item {
-  border: 5px solid darkblue;
+  border: 3px solid darkblue;
 }
 
 .mini-btn-wrap {
@@ -105,7 +130,7 @@ body {
   background: url(/Assets/images/shovel.jpg) no-repeat center center/cover;
 }
 .axe-btn {
-  background: url(/Assets/images/axe.png) no-repeat center center/cover;
+  background: url(/Assets/images/axe.jpg) no-repeat center center/cover;
 }
 .pickaxe-btn {
   background: url(/Assets/images/pickaxe.jpg) no-repeat center center/cover;
